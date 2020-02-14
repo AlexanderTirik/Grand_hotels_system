@@ -11,7 +11,7 @@ app.options("*", cors())
 app.use(express.json())
 
 app.post("/insertdata", cors(), (req, res) => {
-  table = req.body.where
+  table = req.body.table
   info = req.body.info
   dataBase.insertData(table, info)
 })

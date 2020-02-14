@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import { ButtonGroup, Button } from "react-bootstrap"
 import ShowData from "../ShowData/ShowData.js"
+import InsertData from "../InsertData/InsertData.js"
 
 export default function Data() {
   const [table, setTalbe] = useState("hotels")
@@ -40,8 +41,9 @@ export default function Data() {
           <Button onClick={() => setTalbe("visitors")}>Visitors</Button>
         </ButtonGroup>
       </div>
-      {/* <InsertData headers = {headers}/> */}
+      
       <ShowData table = {table} headers = {headers}/>
+      <InsertData table = {table} headers = {headers}/>
     </React.Fragment>
   )
 }
