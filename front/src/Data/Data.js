@@ -34,7 +34,6 @@ export default function Data() {
 
   useEffect(showDataColumnsReq, [table])
 
-
   let modeComponent
   if (mode === "insert")
     modeComponent = <InsertData table={table} headers={headers} />
@@ -61,9 +60,6 @@ export default function Data() {
           </Button>
           <Button name="classes" onClick={() => setTalbe("classes")}>
             Classes
-          </Button>
-          <Button name="felicites" onClick={() => setTalbe("felicites")}>
-            Felicites
           </Button>
           <Button name="visits" onClick={() => setTalbe("visits")}>
             Visits
