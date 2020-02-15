@@ -47,7 +47,8 @@ const showDataColumns = (table, res) => {
   const query = `
   SELECT COLUMN_NAME
   FROM INFORMATION_SCHEMA.COLUMNS
-  WHERE TABLE_NAME LIKE ?
+  WHERE TABLE_NAME = ?
+  ORDER BY ORDINAL_POSITION
   `
   connection.query(query, table, (error, result, fields) => {
     if (error) {
