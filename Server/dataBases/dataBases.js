@@ -25,6 +25,7 @@ const insertData = (table, info) => {
         console.error("An error occurred while executing the INSERT query")
         throw error
       }
+      
     }
   )
 }
@@ -37,6 +38,7 @@ const showData = (table, res) => {
       console.error("An error occurred while executing the SELECT query.")
       throw error
     }
+    
     res.send(JSON.stringify(result))
   })
 }
