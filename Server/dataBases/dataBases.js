@@ -84,7 +84,7 @@ const checkData = (table, key, value, res) => {
 
 exports.checkData = checkData
 
-const deleteData = (table, id, res) => {
+const deleteData = (table, id) => {
   const queryInfo = [table, id]
 
   const query = `
@@ -96,8 +96,25 @@ const deleteData = (table, id, res) => {
       console.error("An error occurred while executing the DELETE query.")
       throw error
     }
-
   })
 }
 
 exports.deleteData = deleteData
+
+const updateData = (table, info, id) => {
+  const queryInfo = [table, info, id]
+
+  const query = `
+  UPDATE ??
+  SET ?
+  WHERE id = ?
+  `
+  connection.query(query, queryInfo, (error, result, fields) => {
+    if (error) {
+      console.error("An error occurred while executing the UPDATE query.")
+      throw error
+    }
+  })
+}
+
+exports.updateData = updateData

@@ -36,5 +36,12 @@ app.post("/checkdata", cors(), (req, res) => {
 app.post("/deletedata", cors(), (req, res) => {
   table = req.body.table
   id = req.body.info.id
-  dataBase.deleteData(table, id, res)
+  dataBase.deleteData(table, id)
+})
+
+app.post("/updatedata", cors(), (req, res) => {
+  table = req.body.table
+  query = req.body.info
+  id = query.id
+  dataBase.updateData(table, query, id)
 })
