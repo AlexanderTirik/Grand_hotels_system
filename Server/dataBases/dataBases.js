@@ -25,7 +25,6 @@ const insertData = (table, info) => {
         console.error("An error occurred while executing the INSERT query")
         throw error
       }
-      
     }
   )
 }
@@ -38,7 +37,7 @@ const showData = (table, res) => {
       console.error("An error occurred while executing the SELECT query.")
       throw error
     }
-    
+
     res.send(JSON.stringify(result))
   })
 }
@@ -54,7 +53,9 @@ const showDataColumns = (table, res) => {
   `
   connection.query(query, table, (error, result, fields) => {
     if (error) {
-      console.error("An error occurred while executing the SELECT COLUMN_NAME query.")
+      console.error(
+        "An error occurred while executing the SELECT COLUMN_NAME query."
+      )
       throw error
     }
     res.send(JSON.stringify(result))
@@ -63,10 +64,9 @@ const showDataColumns = (table, res) => {
 
 exports.showDataColumns = showDataColumns
 
-
 const checkData = (table, key, value, res) => {
   const queryInfo = [table, key, value]
-  
+
   const query = `
   SELECT * FROM ??
   WHERE ?? = ?
@@ -76,10 +76,10 @@ const checkData = (table, key, value, res) => {
       console.error("An error occurred while executing the CHECK query.")
       throw error
     }
-    if (result[0] != null) res.send({status: true})
-      else
-        res.send({status: false})
-  }) 
+
+    if (result[0] != undefined) res.send(JSON.stringify({ status: true }))
+    else res.send(JSON.stringify({ status: false }))
+  })
 }
 
 exports.checkData = checkData
