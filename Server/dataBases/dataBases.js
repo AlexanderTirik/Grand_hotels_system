@@ -76,9 +76,9 @@ const checkData = (table, key, value, res) => {
       console.error("An error occurred while executing the CHECK query.")
       throw error
     }
-    if (result[0] != null) res.send({status: "ok"})
+    if (result[0] != null) res.send({status: true})
       else
-        res.send({status: "false"})
+        res.send({status: false})
   }) 
 }
 
