@@ -18,10 +18,17 @@ app.post("/insertdata", cors(), (req, res) => {
 
 app.post("/showdata", cors(), (req, res) => {
   table = req.body.table
-  dataBase.showData(table,res);
+  dataBase.showData(table, res)
 })
 
 app.post("/showdatacolumns", cors(), (req, res) => {
   table = req.body.table
-  dataBase.showDataColumns(table,res);
+  dataBase.showDataColumns(table, res)
+})
+
+app.post("/checkdata", cors(), (req, res) => {
+  table = req.body.table
+  elKey = req.body.key
+  value = req.body[elKey]
+  dataBase.checkData(table, elKey, value, res)
 })
