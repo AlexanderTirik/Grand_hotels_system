@@ -32,3 +32,9 @@ app.post("/checkdata", cors(), (req, res) => {
   value = req.body[elKey]
   dataBase.checkData(table, elKey, value, res)
 })
+
+app.post("/deletedata", cors(), (req, res) => {
+  table = req.body.table
+  id = req.body.info.id
+  dataBase.deleteData(table, id, res)
+})
