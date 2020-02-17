@@ -1,15 +1,73 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
-import img from "./images/background.jpg"
+import background from "./images/background.jpg"
+import wave from "./images/wave.png"
 import styled from "styled-components"
 import "../animate.css"
 
 const DivMainBg = styled.div`
-  background-image: url(${img});
+  background-image: url(${background});
   background-size: 100% 100%;
   height: 50vw;
   filter: blur(4px);
+  position:relative;
+`
+const Wave = styled.div`
+  position:absolute;
+  width:100%;
+  height:143px;
+  bottom: 0;
+  left:0;
+  background-image: url(${wave});
+  animation: waving 10s linear infinite;
+
+  @keyframes waving {
+    0%
+    {
+      background-position: 0;
+    }
+    100%
+    {
+      background-position: 1360px;
+    }
+  }
+
+  &:before{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:143px;
+    background-image: url(${wave});
+    left:0;
+    bottom:0;
+    opacity:0.4;
+    animation: waving-reverse 8s linear infinite;
+  }
+
+  @keyframes waving-reverse {
+    0%
+    {
+      background-position: 1360px;
+    }
+    100%
+    {
+      background-position: 0;
+    }
+  }
+
+  &:after{
+    position:absolute;
+    content:'';
+    width:100%;
+    height:143px;
+    background-image: url(${wave});
+    left:0;
+    bottom:0;
+    opacity:0.6;
+    animation: waving 20s -5s linear infinite;
+  }
+
 `
 
 const Greet = styled.div`
@@ -66,7 +124,7 @@ const Button = styled.button`
 export default function Greeting(props) {
   return (
     <React.Fragment>
-      <DivMainBg />
+      <DivMainBg><Wave/></DivMainBg>
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
