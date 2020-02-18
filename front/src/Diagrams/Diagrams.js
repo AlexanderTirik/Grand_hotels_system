@@ -3,6 +3,8 @@ import { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import styled from "styled-components"
 import { Pie } from "react-chartjs-2"
+import AOS from "aos"
+import '../../node_modules/aos/dist/aos.css'
 
 
 const roomsData = {
@@ -46,12 +48,14 @@ const DiagramWrap=styled.div`
     width:100%;
 `
 
+
+
 export default function Diagrams(props) {
-  return (
+    useEffect(()=>{AOS.init({duration:2000})},[])
+    return (
     <Div>
-        
-      <DiagramWrap><Pie data={roomsData}  options={{}} /></DiagramWrap>
-      <DiagramWrap><Pie data={feedBackData}options={{}} /></DiagramWrap>
+      <DiagramWrap data-aos="fade-right"><Pie data={roomsData}  options={{}} /></DiagramWrap>
+      <DiagramWrap data-aos="fade-right"><Pie data={feedBackData}options={{}} /></DiagramWrap>
     </Div>
   )
 }
