@@ -12,7 +12,6 @@ const DivMainBg = styled.div`
   height: 50vw;
   filter: blur(4px);
   position: relative;
-
 `
 const Wave = styled.div`
   position: absolute;
@@ -67,7 +66,7 @@ const Wave = styled.div`
 `
 
 const Greet = styled.div`
-  font-family: "Georgia";
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   font-weight: bold;
   font-size: 3em;
   width: 100%;
@@ -77,7 +76,7 @@ const Greet = styled.div`
   margin: 40px 10px 30px;
 `
 const SubGreet = styled.div`
-  font-family: "Georgia";
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   font-size: 2em;
   width: 100%;
   color: #754857;
@@ -99,7 +98,7 @@ const Menu = styled.div`
   flex-direction: column;
   left: 27%;
   top: 12vw;
-  background-color: rgba(245, 223, 230, 0.5);
+  background-color: rgba(245, 223, 230, 0.4);
   border-radius: 10px;
   border: 4px solid #f6e1e8;
   align-items: center;
@@ -109,12 +108,27 @@ const Button = styled.button`
   padding: 10px;
   width: 100%;
   height: 100%;
-  background-color: rgba(194, 176, 182, 0.5);
+  background-color: rgba(244, 215, 250, 0.4);
   border: 0px solid;
   border-radius: 10px;
-  font-family: "Georgia";
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  color: #754857;
+  font-size: 3em;
+`
+const DBButton = styled.button`
+  position: fixed;
+  padding: 10px;
+  margin:5px;
+  background-color: rgba(244, 215, 250, 0.5);
+  border: 1px solid #f6e1e8;
+  border-radius: 10px;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #754857;
   font-size: 1.5em;
+  z-index:999;
+  left:0%;
+  top:0%;
+
 `
 
 export default function Greeting(props) {
@@ -123,6 +137,7 @@ export default function Greeting(props) {
       <DivMainBg>
         <Wave />
       </DivMainBg>
+      <DBButton>Edit DataBase</DBButton>
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
