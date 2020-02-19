@@ -5,6 +5,7 @@ import background from "./images/background.jpg"
 import wave from "./images/wave.png"
 import styled from "styled-components"
 import "../animate.css"
+import {Link} from "react-router-dom"
 
 const DivMainBg = styled.div`
   background-image: url(${background});
@@ -137,7 +138,7 @@ export default function Greeting(props) {
       <DivMainBg>
         <Wave />
       </DivMainBg>
-      <DBButton>Edit DataBase</DBButton>
+      <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link>
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
