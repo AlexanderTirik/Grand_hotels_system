@@ -93,12 +93,12 @@ const Break = styled.div`
 
 const Menu = styled.div`
   width: 50%;
-  height: 50%;
+  height: 25vw;
   position: absolute;
   display: flex;
   flex-direction: column;
   left: 27%;
-  top: 30%;
+  top: 12vw;
   background-color: rgba(245, 223, 230, 0.5);
   border-radius: 10px;
   border: 4px solid #f6e1e8;
