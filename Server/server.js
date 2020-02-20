@@ -68,10 +68,24 @@ app.post(
         .isInt(),
       check("info.start_date")
         .exists()
-        .isISO8601(),
+        .isISO8601()
+        .toDate(),
       check("info.end_date")
         .exists()
         .isISO8601()
+        .toDate()
+    ],
+    [
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+        check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+        check("info.phone_number")
+        .exists()
+        .isMobilePhone(),
+      
     ]
   ]),
   cors(),
