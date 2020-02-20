@@ -1,6 +1,6 @@
 const express = require("express")
 const cors = require("cors")
-const { check, validationResult } = require("express-validator")
+const { check, oneOf, validationResult } = require("express-validator")
 const app = express()
 
 app.listen(3001, () => console.log("Server ready"))
@@ -11,11 +11,81 @@ app.options("*", cors())
 
 app.use(express.json())
 
-app.post("/insertdata", cors(), (req, res) => {
-  const table = req.body.table
-  const info = req.body.info
-  dataBase.insertData(table, info)
-})
+app.post(
+  "/insertdata",
+  oneOf([
+    [
+      check("info.hotel_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.stars")
+        .exists()
+        .isInt({ min: 1, max: 5 })
+    ],
+    [
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.hotel_id")
+        .exists()
+        .isInt(),
+      check("info.position_id")
+        .exists()
+        .isInt()
+    ],
+    check("info.position_name")
+      .exists()
+      .isLength({ min: 1, max: 20 }),
+    [
+      check("info.hotel_id")
+        .exists()
+        .isInt(),
+      check("info.number")
+        .exists()
+        .isInt(),
+      check("info.class_id")
+        .exists()
+        .isInt(),
+      check("info.capacity")
+        .exists()
+        .isInt({ min: 1, max: 6 }),
+      check("info.price")
+        .exists()
+        .isInt({ min: 1 })
+    ],
+    check("info.class_name")
+      .exists()
+      .isLength({ min: 1, max: 20 }),
+    [
+      check("info.visitor_id")
+        .exists()
+        .isInt(),
+      check("info.room_id")
+        .exists()
+        .isInt(),
+      check("info.start_date")
+        .exists()
+        .isISO8601(),
+      check("info.end_date")
+        .exists()
+        .isISO8601()
+    ]
+  ]),
+  cors(),
+  (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const table = req.body.table
+    const info = req.body.info
+
+    dataBase.insertData(table, info)
+  }
+)
 
 app.post("/showdata", cors(), (req, res) => {
   const table = req.body.table
