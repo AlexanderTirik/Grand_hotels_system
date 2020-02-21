@@ -79,13 +79,12 @@ app.post(
       check("info.first_name")
         .exists()
         .isLength({ min: 1, max: 20 }),
-        check("info.second_name")
+      check("info.second_name")
         .exists()
         .isLength({ min: 1, max: 20 }),
-        check("info.phone_number")
+      check("info.phone_number")
         .exists()
-        .isMobilePhone(),
-      
+        .isMobilePhone()
     ]
   ]),
   cors(),
@@ -118,11 +117,24 @@ app.post("/checkdata", cors(), (req, res) => {
   dataBase.checkData(table, elKey, value, res)
 })
 
-app.post("/deletedata", cors(), (req, res) => {
-  const table = req.body.table
-  const id = req.body.info.id
-  dataBase.deleteData(table, id)
-})
+app.post(
+  "/deletedata",
+  [
+    check("info.id")
+      .exists()
+      .isInt()
+  ],
+  cors(),
+  (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+    const table = req.body.table
+    const id = req.body.info.id
+    dataBase.deleteData(table, id)
+  }
+)
 
 app.post("/updatedata", cors(), (req, res) => {
   const table = req.body.table
