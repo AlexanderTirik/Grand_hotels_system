@@ -68,12 +68,10 @@ app.post(
         .isInt(),
       check("info.start_date")
         .exists()
-        .isISO8601()
-        .toDate(),
+        .isISO8601(),
       check("info.end_date")
         .exists()
         .isISO8601()
-        .toDate()
     ],
     [
       check("info.first_name")
@@ -136,9 +134,115 @@ app.post(
   }
 )
 
-app.post("/updatedata", cors(), (req, res) => {
-  const table = req.body.table
-  const query = req.body.info
-  const id = query.id
-  dataBase.updateData(table, query, id)
-})
+app.post(
+  "/updatedata",
+  oneOf([
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.hotel_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.stars")
+        .exists()
+        .isInt({ min: 1, max: 5 })
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.hotel_id")
+        .exists()
+        .isInt(),
+      check("info.position_id")
+        .exists()
+        .isInt()
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.position_name")
+        .exists()
+        .isLength({ min: 1, max: 20 })
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.hotel_id")
+        .exists()
+        .isInt(),
+      check("info.number")
+        .exists()
+        .isInt(),
+      check("info.class_id")
+        .exists()
+        .isInt(),
+      check("info.capacity")
+        .exists()
+        .isInt({ min: 1, max: 6 }),
+      check("info.price")
+        .exists()
+        .isInt({ min: 1 })
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.class_name")
+        .exists()
+        .isLength({ min: 1, max: 20 })
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.visitor_id")
+        .exists()
+        .isInt(),
+      check("info.room_id")
+        .exists()
+        .isInt(),
+      check("info.start_date")
+        .exists()
+        .isISO8601(),
+      check("info.end_date")
+        .exists()
+        .isISO8601()
+    ],
+    [
+      check("info.id")
+        .exists()
+        .isInt(),
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.phone_number")
+        .exists()
+        .isMobilePhone()
+    ]
+  ]),
+  cors(),
+  (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() })
+    }
+
+    const table = req.body.table
+    const query = req.body.info
+    const id = query.id
+    dataBase.updateData(table, query, id)
+  }
+)
