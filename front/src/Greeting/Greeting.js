@@ -69,7 +69,7 @@ const Wave = styled.div`
 const Greet = styled.div`
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   font-weight: bold;
-  font-size: 3em;
+  font-size: 3vw;
   width: 100%;
   color: #754857;
   text-align: center;
@@ -78,7 +78,7 @@ const Greet = styled.div`
 `
 const SubGreet = styled.div`
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  font-size: 2em;
+  font-size: 2vw;
   width: 100%;
   color: #754857;
   text-align: center;
@@ -86,7 +86,7 @@ const SubGreet = styled.div`
 `
 
 const Break = styled.div`
-  height: 10px;
+  height: 2px;
   width: 100%;
   background-color: #f6e1e8;
 `
@@ -106,15 +106,15 @@ const Menu = styled.div`
   align-content: space-between;
 `
 const Button = styled.button`
-  padding: 10px;
+  padding: 2vw 5vw;
   width: 100%;
   height: 100%;
   background-color: rgba(244, 215, 250, 0.4);
   border: 0px solid;
-  border-radius: 10px;
+  border-radius: 1vw;
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   color: #754857;
-  font-size: 3em;
+  font-size: 3vw;
 `
 const DBButton = styled.button`
   position: fixed;
