@@ -4,12 +4,20 @@ import AOS from "aos"
 import "bootstrap/dist/css/bootstrap.css"
 import { Carousel } from "react-bootstrap"
 import "../../node_modules/aos/dist/aos.css"
-import HotelCard from "../HotelCard/HotelCard"
 import bud from "./HotelImages/Budapest.jpg"
 
 export default function HotelCarousel(props) {
+  const Div = styled.div`
+    position: relative;
+    height: 50%;
+    width: 50%;
+    left: 25%;
+    border-radius: 10px;
+    border: 4px solid #f6e1e8;
+    margin:4px;
+  `
   return (
-    <div>
+    <Div data-aos="zoom-in">
       <Carousel>
         <Carousel.Item>
           <img
@@ -49,6 +57,6 @@ export default function HotelCarousel(props) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-    </div>
+    </Div>
   )
 }
