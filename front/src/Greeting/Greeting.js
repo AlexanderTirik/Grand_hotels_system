@@ -11,7 +11,7 @@ const DivMainBg = styled.div`
   background-image: url(${background});
   background-size: 100% 100%;
   height: 50vw;
-  filter: blur(4px);
+  filter: blur(3px);
   position: relative;
 `
 const Wave = styled.div`
