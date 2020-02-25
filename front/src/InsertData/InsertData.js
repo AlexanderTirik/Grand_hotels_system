@@ -103,25 +103,6 @@ export default function InsertData(props) {
     })()
   }
 
-  // const handleCheck = () => {
-  //   const options = {
-  //     method: "POST",
-  //     headers: new Headers({
-  //       "content-type": "application/json"
-  //     }),
-  //     body: JSON.stringify({
-  //       table: "hotels",
-  //       key: "id",
-  //       id: 5
-  //     })
-  //   }
-  //   ;(async () => {
-  //     const response = await fetch("http://127.0.0.1:3001/checkdata", options)
-  //     const status = await response.json()
-  //     console.log(status)
-  //   })()
-  // }
-
   const handleChange = event => {
     const q = query
     q[event.currentTarget.name] = event.target.value
