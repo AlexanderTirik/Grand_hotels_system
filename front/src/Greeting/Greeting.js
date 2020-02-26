@@ -6,6 +6,7 @@ import wave from "./images/wave.png"
 import styled from "styled-components"
 import "../animate.css"
 import {Link} from "react-router-dom"
+import {animateScroll as scroll} from "react-scroll"
 
 const DivMainBg = styled.div`
   background-image: url(${background});
@@ -143,7 +144,7 @@ export default function Greeting(props) {
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
         <Break />
-        <Button>Choose hotel</Button>
+        <Button onClick={() => {scroll.scrollToBottom()}}>Choose hotel</Button>
       </Menu>
     </React.Fragment>
   )
