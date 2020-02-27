@@ -20,7 +20,10 @@ app.post(
         .isLength({ min: 1, max: 20 }),
       check("info.stars")
         .exists()
-        .isInt({ min: 1, max: 5 })
+        .isInt({ min: 1, max: 5 }),
+      check("info.img")
+        .exists()
+        .isDataURI()
     ],
     [
       check("info.first_name")
@@ -59,8 +62,10 @@ app.post(
     check("info.class_name")
       .exists()
       .isLength({ min: 1, max: 20 }),
-    [
-      check("info.visitor_id")
+    check("info.img")
+      .exists()
+      .isDataURI()[
+      (check("info.visitor_id")
         .exists()
         .isInt(),
       check("info.room_id")
@@ -71,7 +76,7 @@ app.post(
         .isISO8601(),
       check("info.end_date")
         .exists()
-        .isISO8601()
+        .isISO8601())
     ],
     [
       check("info.first_name")
@@ -146,7 +151,10 @@ app.post(
         .isLength({ min: 1, max: 20 }),
       check("info.stars")
         .exists()
-        .isInt({ min: 1, max: 5 })
+        .isInt({ min: 1, max: 5 }),
+      check("info.img")
+        .exists()
+        .isDataURI()
     ],
     [
       check("info.id")
@@ -199,7 +207,10 @@ app.post(
         .isInt(),
       check("info.class_name")
         .exists()
-        .isLength({ min: 1, max: 20 })
+        .isLength({ min: 1, max: 20 }),
+      check("info.img")
+        .exists()
+        .isDataURI()
     ],
     [
       check("info.id")
