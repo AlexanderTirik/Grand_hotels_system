@@ -5,6 +5,7 @@ import Greeting from "../Greeting/Greeting.js"
 import styled from "styled-components"
 import Diagrams from "../Diagrams/Diagrams.js"
 import HotelCarousel from "../HotelCarousel/HotelCarousel.js"
+import NavBar from "../NavBar/NavBar.js"
 
 
 
@@ -16,11 +17,10 @@ export default function MainPage(props) {
 
   return (
     <Div>
+        <NavBar/>
         <Greeting/>
         <Diagrams/>
-        <Div>
-         <HotelCarousel/>
-        </Div>
+        <HotelCarousel/>
     </Div>
   )
 }
