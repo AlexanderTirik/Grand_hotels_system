@@ -10,11 +10,11 @@ export default function HotelCarousel(props) {
   const Div = styled.div`
     position: relative;
     height: 50%;
-    width: 50%;
-    left: 25%;
+    width: 75%;
+    left: 13.5%;
     border-radius: 10px;
     border: 4px solid #f6e1e8;
-    margin:4px;
+    margin: 25px 0px;
   `
   return (
     <Div data-aos="zoom-in">
