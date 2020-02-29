@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
-import background from "./images/background.jpg"
-import wave from "./images/wave.png"
+import background from "../images/background.jpg"
+import wave from "../images/wave.png"
 import styled from "styled-components"
 import "../animate.css"
 import {Link} from "react-router-dom"
@@ -139,7 +139,7 @@ export default function Greeting(props) {
       <DivMainBg>
         <Wave />
       </DivMainBg>
-      <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link>
+      {/* <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link> */}
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
