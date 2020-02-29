@@ -1,23 +1,58 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import wave from "../images/wave.png"
 
 export default function NavBar(props) {
-  const [scrolled, setScrolled] = useState(false)
 
-  const Logo = styled.a`
-    position: relative;
-    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-    font-weight: bold;
-    text-decoration: none;
-    color: #754857;
-    font-size: 2em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: 0.6s;
+  const Div = styled.div`
+    display:flex;
+    justify-content:flex-start;
+    flex-direction:column;
+    align-items:flex-start;
   `
 
+const WaveF = styled.div`
+z-index:2;
+filter:blur(2px);
+transform: rotate(180deg);
+opacity:0.8;
+position: fixed;
+width: 100%;
+height: 143px;
+background-image: url(${wave});
+animation: waving 10s linear infinite;
+
+@keyframes waving {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 1360px;
+  }
+}
+`
+const WaveS = styled.div`
+    z-index:2;
+    filter:blur(2px);
+    transform: rotate(180deg);
+    opacity:0.5;
+    position: fixed;
+    width: 100%;
+    height: 143px;
+    background-image: url(${wave});
+    animation: waving-reverse 20s -5s linear infinite;
+
+    @keyframes waving-reverse {
+    0% {
+      background-position: 1360px;
+    }
+    100% {
+      background-position: 0;
+    }
+  }
+  `
   const Ul = styled.ul`
     position: relative;
     display: flex;
@@ -30,68 +65,34 @@ export default function NavBar(props) {
     list-style: none;
   `
 
-  let Header = styled.header`
-    z-index: 2;
+  const Header = styled.header`
+    z-index: 3;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    transition: 0.6s;
-    padding: 40px 100px;
+    padding: 20px 100px;
   `
 
-  let A = styled.a`
+  const A = styled.button`
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     position: relative;
     margin: 0 15px;
     text-decoration: none;
     color: #754857;
     letter-spacing: 2px;
     font-weight: 500;
-    transition: 0.6s;
+    background-color: #f5dfe6;
+    padding: 10px;
+    border: dotted 2px #c2b0b6;
   `
 
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      const isTop = window.scrollY < 50
-      if (isTop !== true) setScrolled(true)
-      else setScrolled(false)
-    })
-  }, [])
-
-  if (scrolled == true) {
-    Header = styled.header`
-      z-index: 2;
-      background-color: #f5dfe6;
-      border-bottom: solid 2px #f796b6;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: 0.6s;
-      padding: 5px 100px;
-    `
-    A = styled.a`
-      position: relative;
-      margin: 15px 15px 0px;
-      text-decoration: none;
-      font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-      color: #754857;
-      letter-spacing: 2px;
-      font-weight: 500;
-      transition: 0.6s;
-    `
-  }
-
   return (
-    <div>
+    <Div>
       <Header>
-        <Logo>GHS</Logo>
         <Ul>
           <Li>
             <A>Home</A>
@@ -113,6 +114,8 @@ export default function NavBar(props) {
           </Li>
         </Ul>
       </Header>
-    </div>
+      <WaveF/>
+      <WaveS/>
+    </Div>
   )
 }
