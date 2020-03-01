@@ -6,7 +6,7 @@ import styled from "styled-components"
 import Diagrams from "../Diagrams/Diagrams.js"
 import HotelCarousel from "../HotelCarousel/HotelCarousel.js"
 import NavBar from "../NavBar/NavBar.js"
-
+import AboutUs from "../AboutUs/AboutUs"
 
 
 export default function MainPage(props) {
@@ -21,6 +21,7 @@ export default function MainPage(props) {
         <Greeting/>
         <Diagrams/>
         <HotelCarousel/>
+        <AboutUs/>
     </Div>
   )
 }
