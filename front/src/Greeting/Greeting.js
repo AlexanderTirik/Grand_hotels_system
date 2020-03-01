@@ -144,7 +144,7 @@ export default function Greeting(props) {
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
         <Break />
-        <Button onClick={() => {scroll.scrollToBottom()}}>Choose hotel</Button>
+        <Button onClick={() => {scroll.scrollTo(1100)}}>Choose hotel</Button>
       </Menu>
     </React.Fragment>
   )
