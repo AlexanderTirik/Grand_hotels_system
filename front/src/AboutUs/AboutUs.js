@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import AOS from "aos"
 
 export default function MainPage(props) {
   const Div = styled.div`
@@ -22,7 +23,7 @@ export default function MainPage(props) {
   `
 
   return (
-    <Div>
+    <Div data-aos="zoom-in-down">
       <H1>About us</H1>
       <Article>
         We are a progressive hotel chain, which strives to offer our customers
