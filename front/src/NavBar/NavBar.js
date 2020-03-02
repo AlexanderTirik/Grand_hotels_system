@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import styled, { css } from "styled-components"
 import wave from "../images/wave.png"
+import {animateScroll as scroll} from "react-scroll"
 
 export default function NavBar(props) {
 
@@ -95,16 +96,16 @@ const WaveS = styled.div`
       <Header>
         <Ul>
           <Li>
-            <A>Home</A>
+            <A onClick={() => {scroll.scrollToTop()}}>Home</A>
           </Li>
           <Li>
-            <A>Statistics</A>
+            <A onClick={() => {scroll.scrollTo(450)}}>Statistics</A>
           </Li>
           <Li>
-            <A>Hotels</A>
+            <A onClick={() => {scroll.scrollTo(1100)}}>Hotels</A>
           </Li>
           <Li>
-            <A>About us</A>
+            <A onClick={() => {scroll.scrollTo(1500)}}>About us</A>
           </Li>
           <Li>
             <A>Login</A>
