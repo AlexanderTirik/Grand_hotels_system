@@ -102,7 +102,7 @@ const WaveS = styled.div`
             <A onClick={() => {scroll.scrollTo(450)}}>Statistics</A>
           </Li>
           <Li>
-            <A onClick={() => {scroll.scrollTo(1100)}}>Hotels</A>
+            <A onClick={() => {scroll.scrollTo(1060)}}>Hotels</A>
           </Li>
           <Li>
             <A onClick={() => {scroll.scrollTo(1500)}}>About us</A>

@@ -139,12 +139,12 @@ export default function Greeting(props) {
       <DivMainBg>
         <Wave />
       </DivMainBg>
-      {/* <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link> */}
+      <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link>
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
         <Break />
-        <Button onClick={() => {scroll.scrollTo(1100)}}>Choose hotel</Button>
+        <Button onClick={() => {scroll.scrollTo(1060)}}>Choose hotel</Button>
       </Menu>
     </React.Fragment>
   )
