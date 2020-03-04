@@ -5,7 +5,7 @@ import background from "../images/background.jpg"
 import wave from "../images/wave.png"
 import styled from "styled-components"
 import "../animate.css"
-import {Link} from "react-router-dom"
+
 import {animateScroll as scroll} from "react-scroll"
 
 const DivMainBg = styled.div`
@@ -117,21 +117,7 @@ const Button = styled.button`
   color: #754857;
   font-size: 3vw;
 `
-const DBButton = styled.button`
-  position: fixed;
-  padding: 10px;
-  margin:5px;
-  background-color: rgba(244, 215, 250, 0.5);
-  border: 1px solid #f6e1e8;
-  border-radius: 10px;
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  color: #754857;
-  font-size: 1.5em;
-  z-index:999;
-  left:0%;
-  top:0%;
 
-`
 
 export default function Greeting(props) {
   return (
@@ -139,7 +125,7 @@ export default function Greeting(props) {
       <DivMainBg>
         <Wave />
       </DivMainBg>
-      <Link to={`/dbcontrol`}><DBButton>Edit DataBase</DBButton></Link>
+      
       <Menu className="animated fadeIn">
         <Greet>Grand Hotel Systems</Greet>
         <SubGreet>The best hotel chain in the world</SubGreet>
