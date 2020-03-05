@@ -6,11 +6,13 @@ import ShowData from "../ShowData/ShowData.js"
 import InsertData from "../InsertData/InsertData.js"
 import DeleteData from "../DeleteData/DeleteData.js"
 import UpdateData from "../UpdateData/UpdateData.js"
+import SaveImage from "../SaveImage/SaveImage.js"
 
 export default function Data() {
   const [table, setTalbe] = useState("hotels")
   const [headers, setHeaders] = useState([])
   const [mode, setMode] = useState("insert")
+  const [imageUp, setImageUp] = useState("hotels")
 
   const showDataColumnsReq = () => {
     const options = {
@@ -79,6 +81,11 @@ export default function Data() {
         </ButtonGroup>
       </div>
       {modeComponent}
+      <ButtonGroup className="mr-2" aria-label="Second group">
+        <Button onClick={() => setImageUp("hotels")}>Hotels</Button>
+        <Button onClick={() => setImageUp("classes")}>Classes</Button>
+      </ButtonGroup>
+      <SaveImage table={imageUp} />
     </React.Fragment>
   )
 }
