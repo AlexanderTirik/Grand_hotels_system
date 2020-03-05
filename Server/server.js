@@ -276,6 +276,5 @@ app.post("/saveimage", cors(), (req, res) => {
         'Content-Type': 'application/json'
       })
       res.end(JSON.stringify({ status: 'success', path: '/images/' + image.name }))
-    }
+    })
   })
-})
