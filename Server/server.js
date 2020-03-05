@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const { check, oneOf, validationResult } = require("express-validator")
+const fileUpload = require("express-fileupload")
 const app = express()
 
 app.listen(3001, () => console.log("Server ready"))
@@ -10,6 +11,7 @@ const dataBase = require("./dataBases/dataBases.js")
 app.options("*", cors())
 
 app.use(express.json())
+app.use(fileUpload())
 
 app.post(
   "/insertdata",
@@ -20,10 +22,7 @@ app.post(
         .isLength({ min: 1, max: 20 }),
       check("info.stars")
         .exists()
-        .isInt({ min: 1, max: 5 }),
-      check("info.img")
-        .exists()
-        .isDataURI()
+        .isInt({ min: 1, max: 5 })
     ],
     [
       check("info.first_name")
@@ -59,12 +58,12 @@ app.post(
         .exists()
         .isInt({ min: 1 })
     ],
-    check("info.class_name")
-      .exists()
-      .isLength({ min: 1, max: 20 }),
-    check("info.img")
-      .exists()
-      .isDataURI()[
+    [
+      check("info.class_name")
+        .exists()
+        .isLength({ min: 1, max: 20 })
+    ],
+    [
       (check("info.visitor_id")
         .exists()
         .isInt(),
@@ -96,6 +95,7 @@ app.post(
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
     }
+    console.log(req.body.info)
     const table = req.body.table
     const info = req.body.info
 
@@ -257,3 +257,25 @@ app.post(
     dataBase.updateData(table, query, id)
   }
 )
+
+app.post("/saveimage", cors(), (req, res) => {
+  image = req.files.picture
+  const path = "images/" + image.name
+
+  image.mv(path, error => {
+    if (error) {
+      console.error(error)
+        res.writeHead(500, {
+          'Content-Type': 'application/json'
+        })
+        res.end(JSON.stringify({ status: 'error', message: error }))
+        return
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'application/json'
+      })
+      res.end(JSON.stringify({ status: 'success', path: '/images/' + image.name }))
+    }
+  })
+})
