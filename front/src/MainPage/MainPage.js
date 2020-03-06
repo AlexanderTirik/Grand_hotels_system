@@ -31,9 +31,9 @@ export default function MainPage(props) {
 
   return (
     <Div>
-      <Link to={`/dbcontrol`}>
+      {/* <Link to={`/dbcontrol`}>
         <DBButton>Edit DataBase</DBButton>
-      </Link>
+      </Link> */}
       <NavBar />
       <Greeting />
       <Diagrams />

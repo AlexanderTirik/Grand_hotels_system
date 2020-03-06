@@ -7,6 +7,8 @@ import "../../node_modules/aos/dist/aos.css"
 import bud from "./HotelImages/Budapest.jpg"
 
 export default function HotelCarousel(props) {
+  const [data, setData] = useState();
+
   const Div = styled.div`
     position: relative;
     height: 50%;
@@ -16,6 +18,26 @@ export default function HotelCarousel(props) {
     border: 4px solid #f6e1e8;
     margin: 25px 0px;
   `
+  
+  useEffect(() => {
+      const options = {
+        method: "POST",
+        headers: new Headers({
+          "content-type": "application/json"
+        }),
+        body: JSON.stringify({
+          table: "hotels"
+        })
+      }
+      ;(async () => {
+        const response = await fetch("http://127.0.0.1:3001/showdata", options)
+        const data = await response.json()
+        setData(data)
+        console.log(data);
+      })()
+  },[])
+
+
   return (
     <Div data-aos="zoom-in">
       <Carousel>
