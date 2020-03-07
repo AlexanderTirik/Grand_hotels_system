@@ -258,9 +258,9 @@ app.post(
   }
 )
 
-app.post("/saveimage", cors(), (req, res) => {
+app.post("/saveimage/:table", cors(), (req, res) => {
   image = req.files.picture
-  const path = "images/" + image.name
+  const path = "images/" + `${req.params.table}/` + image.name
 
   image.mv(path, error => {
     if (error) {
@@ -278,3 +278,4 @@ app.post("/saveimage", cors(), (req, res) => {
       res.end(JSON.stringify({ status: 'success', path: '/images/' + image.name }))
     })
   })
+
