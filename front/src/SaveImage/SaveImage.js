@@ -8,10 +8,11 @@ export default function SaveImage(props) {
   const submitClick = () => {
     const options = {
       method: "POST",
-      body: image
+      body: image,
+      params: props.table
     }
     ;(async () => {
-      const response = await fetch("http://127.0.0.1:3001/saveimage", options)
+      const response = await fetch(`http://127.0.0.1:3001/saveimage/${props.table}`, options)
     })()
   }
   
