@@ -279,3 +279,8 @@ app.post("/saveimage/:table", cors(), (req, res) => {
     })
   })
 
+app.get("/getimage/:type/:name", cors(), (req,res) => {
+  const file = __dirname + "/images/" + `${req.params.type}/` + `${req.params.name}.jpg`
+  
+  res.sendFile(file)
+})
