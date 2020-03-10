@@ -9,7 +9,6 @@ export default function SaveImage(props) {
     const options = {
       method: "POST",
       body: image,
-      params: props.table
     }
     ;(async () => {
       const response = await fetch(`http://127.0.0.1:3001/saveimage/${props.table}`, options)
@@ -28,7 +27,7 @@ export default function SaveImage(props) {
   return (
     <div>
       <form>
-        <input type="file" onChange={handleFile} />
+        <input type="file" onChange={handleFile} accept="image/*"/>
         <button onClick={submitClick}>Submit</button>
       </form>
     </div>
