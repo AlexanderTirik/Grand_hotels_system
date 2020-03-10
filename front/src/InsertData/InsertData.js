@@ -104,7 +104,7 @@ export default function InsertData(props) {
   }
 
   const handleChange = event => {
-    const q = query
+    const q = Object.assign({}, query)
     q[event.currentTarget.name] = event.target.value
     setQuery(q)
   }

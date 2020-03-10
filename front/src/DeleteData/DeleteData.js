@@ -3,7 +3,7 @@ import { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 
 export default function DeleteData(props) {
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState({})
 
   const submitClick = () => {
     const options = {
@@ -21,8 +21,8 @@ export default function DeleteData(props) {
     })()
   }
 
-  const handleChange = (event) => {
-    const q = query;
+  const handleChange = event => {
+    const q = Object.assign({}, query)
     q[event.currentTarget.name] = event.target.value
     setQuery(q)
   }
@@ -30,8 +30,15 @@ export default function DeleteData(props) {
   return (
     <React.Fragment>
       <form>
-        <input key='id' type="text" name="id" placeholder="id" value = {query.id} onChange = {handleChange}/>
-        <button onClick = {submitClick}>Submit</button>
+        <input
+          key="id"
+          type="text"
+          name="id"
+          placeholder="id"
+          value={query.id}
+          onChange={handleChange}
+        />
+        <button onClick={submitClick}>Submit</button>
       </form>
     </React.Fragment>
   )
