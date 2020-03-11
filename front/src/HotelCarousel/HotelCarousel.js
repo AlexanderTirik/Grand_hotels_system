@@ -46,7 +46,7 @@ export default function HotelCarousel(props) {
     const source = `http://127.0.0.1:3001/getimage/hotels/${hotelName.replace(" ", "%20")}`
     carousel.push(
       <Carousel.Item>
-        <img className="d block w-100" src={source} />
+        <Img className="d block w-100" src={source} />
         <Carousel.Caption>
           <h3>{hot.hotel_name}</h3>
           <p>{hot.stars} Stars</p>
