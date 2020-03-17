@@ -111,7 +111,7 @@ const WaveS = styled.div`
             <A onClick = {() => props.setIsLoginOpen(true)}>Login</A>
           </Li>
           <Li>
-            <A>Sign up</A>
+            <A onClick = {() => props.setIsSignUpOpen(true)}>Sign up</A>
           </Li>
         </Ul>
       </Header>
