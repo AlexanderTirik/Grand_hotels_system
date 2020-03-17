@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import background from "../images/background.jpg"
 import wave from "../images/wave.png"
 import styled from "styled-components"
-import "../animate.css"
+import "animate.css"
 
 import {animateScroll as scroll} from "react-scroll"
 
