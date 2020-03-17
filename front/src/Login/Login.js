@@ -5,43 +5,51 @@ import Modal from "react-modal"
 
 export default function Login(props) {
   const ModalWindow = styled(Modal)`
+    z-index: 4;
     position: absolute;
-    top: 24%;
+    top: 20%;
     left: 35%;
     right: 35%;
     bottom: 20%;
-    background-color: #f6e1e8;
+    background-image: linear-gradient(#f6e1e8, white);
     border: 3px dashed #754857;
     border-radius: 5%;
-    display:flex;
-    justify-content:center;
-    /* z-index:10000; */
-    /* top:50%; */
-    /* height:100px; */
-    /* width:100px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
   `
   const CloseButton = styled.button`
-  position: absolute;
-  left:90%;
-  margin:5px;
-  font-size:2vw;
-  color: #754857;
-  border: 1px #754857;
-  background-color: #f5dfe6;
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    position: absolute;
+    top: 0%;
+    left: 90%;
+    margin: 5px;
+    font-size: 2vw;
+    color: #754857;
+    border: 1px #754857;
+    background: none;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  `
+  const WordLogin = styled.div`
+    font-size: 2.5vw;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    color: #754857;
+    font-weight: bolder;
   `
   const Form = styled.form`
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: space-around; */
   `
   const Input = styled.input`
-  padding:2px;
-    background-color: #754857;
-    color: #f5dfe6;
-    border: 2px dotted #c2b0b6;
+    padding: 2px;
+    background: none;
+    color: #754857;
+    border: 0;
+    border-bottom: 2px solid #754857;
+    border-left: 2px solid #754857;
     font-size: 2vw;
     margin: 5px;
   `
@@ -51,11 +59,14 @@ export default function Login(props) {
     margin: 5px;
     background-color: #754857;
     color: #f5dfe6;
-    font-size:2vw;
+    font-size: 2vw;
   `
-  const ButtonMenu = styled.div`
-    display: flex;
-    flex-direction: row;
+  const SignUpButton = styled.button`
+    color: #754857;
+    background: none;
+    border: none;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-size: 1.5vw;
   `
   return (
     <>
@@ -64,15 +75,21 @@ export default function Login(props) {
         shouldCloseOnOverlayClick={true}
         onRequestClose={() => props.setIsLoginOpen(false)}
       >
-        <CloseButton onClick = {() => props.setIsLoginOpen(false)}>✗</CloseButton>
+        <CloseButton onClick={() => props.setIsLoginOpen(false)}>✗</CloseButton>
+        <WordLogin> Login </WordLogin>
         <Form>
           <Input type="email" name="email" placeholder="Your email" />
           <Input type="password" name="password" placeholder="Your password" />
-          <ButtonMenu>
-            <Button> Submit </Button>
-            <Button onClick = {() => props.setIsLoginOpen(false)}> Cancel </Button>
-          </ButtonMenu>
+          <Button> Submit </Button>
         </Form>
+        <SignUpButton
+          onClick={() => {
+            props.setIsLoginOpen(false)
+            props.setIsSignUpOpen(true)
+          }}
+        >
+          Sign up
+        </SignUpButton>
       </ModalWindow>
     </>
   )
