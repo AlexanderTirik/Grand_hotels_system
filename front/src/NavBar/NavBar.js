@@ -108,7 +108,7 @@ const WaveS = styled.div`
             <A onClick={() => {scroll.scrollTo(1500)}}>About us</A>
           </Li>
           <Li>
-            <A>Login</A>
+            <A onClick = {() => props.setIsLoginOpen(true)}>Login</A>
           </Li>
           <Li>
             <A>Sign up</A>
