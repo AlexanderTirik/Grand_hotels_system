@@ -7,9 +7,10 @@ import Diagrams from "../Diagrams/Diagrams.js"
 import HotelCarousel from "../HotelCarousel/HotelCarousel.js"
 import NavBar from "../NavBar/NavBar.js"
 import AboutUs from "../AboutUs/AboutUs"
-import {Link} from "react-router-dom"
+import Login from "../Login/Login"
 
 export default function MainPage(props) {
+  const [isLoginOpen, setIsLoginOpen] = useState(true)
   const Div = styled.div`
     background-color: #f6e1e8;
   `
@@ -31,10 +32,11 @@ export default function MainPage(props) {
 
   return (
     <Div>
+      <Login isLoginOpen={isLoginOpen} setIsLoginOpen = {setIsLoginOpen}/>
       {/* <Link to={`/dbcontrol`}>
         <DBButton>Edit DataBase</DBButton>
       </Link> */}
-      <NavBar />
+      <NavBar setIsLoginOpen = {setIsLoginOpen}/>
       <Greeting />
       <Diagrams />
       <HotelCarousel />
