@@ -69,6 +69,9 @@ export default function Data() {
           <Button name="visitors" onClick={() => setTalbe("visitors")}>
             Visitors
           </Button>
+          <Button name="visitors" onClick={() => setTalbe("clients")}>
+            Clients
+          </Button>
         </ButtonGroup>
       </div>
 
