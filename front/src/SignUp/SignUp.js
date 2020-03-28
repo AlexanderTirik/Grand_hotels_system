@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import "bootstrap/dist/css/bootstrap.css"
 import Modal from "react-modal"
-import {useFormik} from "formik"
 import SignUpForm from "../SignUpForm/SignUpForm"
 Modal.setAppElement("#root")
 
