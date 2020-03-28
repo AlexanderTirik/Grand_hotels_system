@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import "bootstrap/dist/css/bootstrap.css"
 import Modal from "react-modal"
+import {useFormik} from "formik"
+import SignUpForm from "../SignUpForm/SignUpForm"
+Modal.setAppElement("#root")
+
 
 export default function SignUp(props) {
   const ModalWindow = styled(Modal)`
@@ -35,30 +39,6 @@ export default function SignUp(props) {
     color: #754857;
     font-weight: bolder;
   `
-  const Form = styled.form`
-    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  `
-  const Input = styled.input`
-    padding: 2px;
-    background: none;
-    color: #754857;
-    border: 0;
-    border-bottom: 2px solid #754857;
-    border-left: 2px solid #754857;
-    font-size: 1.6vw;
-    margin: 5px;
-  `
-  const Button = styled.button`
-    border: 2px solid #c2b0b6;
-    border-radius: 5%;
-    margin: 5px;
-    background-color: #754857;
-    color: #f5dfe6;
-    font-size: 2vw;
-  `
   const LoginButton = styled.button`
     color: #754857;
     background: none;
@@ -66,38 +46,44 @@ export default function SignUp(props) {
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     font-size: 1.5vw;
   `
+
+  // const submitClick = () => {
+  //   if (user.confirmPassword === user.password) {
+  //     const options = {
+  //       method: "POST",
+  //       headers: new Headers({
+  //         "content-type": "application/json"
+  //       }),
+  //       body: JSON.stringify({
+  //         first_name: user.firstName,
+  //         second_name: user.secondName,
+  //         email: user.email,
+  //         password: user.password
+  //       })
+  //     }
+  //     ;(async () => {
+  //       const response = await fetch("http://127.0.0.1:3001/newUser", options)
+  //     })()
+  //   }
+  // }
+
   return (
-    <>
-      <ModalWindow
-        isOpen={props.isSignUpOpen}
-        shouldCloseOnOverlayClick={true}
-        onRequestClose={() => props.setIsSignUpOpen(false)}
+    <ModalWindow
+      isOpen={props.isSignUpOpen}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={() => props.setIsSignUpOpen(false)}
+    >
+      <CloseButton onClick={() => props.setIsSignUpOpen(false)}>✗</CloseButton>
+      <WordSignUp> Sign up </WordSignUp>
+      <SignUpForm/>
+       <LoginButton
+        onClick={() => {
+          props.setIsSignUpOpen(false)
+          props.setIsLoginOpen(true)
+        }}
       >
-        <CloseButton onClick={() => props.setIsSignUpOpen(false)}>
-          ✗
-        </CloseButton>
-        <WordSignUp> Sign up </WordSignUp>
-        <Form>
-          <Input type="text" name="firstName" placeholder="First name" />
-          <Input type="text" name="secondName" placeholder="Second name" />
-          <Input type="email" name="email" placeholder="Your email" />
-          <Input type="password" name="password" placeholder="Your password" />
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm password"
-          />
-          <Button> Submit </Button>
-        </Form>
-        <LoginButton
-          onClick={() => {
-            props.setIsSignUpOpen(false)
-            props.setIsLoginOpen(true)
-          }}
-        >
-          Login
-        </LoginButton>
-      </ModalWindow>
-    </>
+        Login
+      </LoginButton>
+    </ModalWindow>
   )
 }
