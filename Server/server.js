@@ -3,6 +3,7 @@ const cors = require("cors")
 const { check, oneOf, validationResult } = require("express-validator")
 const fileUpload = require("express-fileupload")
 const app = express()
+const bcrypt = require("bcrypt")
 
 app.listen(3001, () => console.log("Server ready"))
 
@@ -87,6 +88,18 @@ app.post(
       check("info.phone_number")
         .exists()
         .isMobilePhone()
+    ],
+    [
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.email").exists().isEmail,
+      check("info.password")
+        .exists()
+        .isHash()
     ]
   ]),
   cors(),
@@ -265,22 +278,65 @@ app.post("/saveimage/:table", cors(), (req, res) => {
   image.mv(path, error => {
     if (error) {
       console.error(error)
-        res.writeHead(500, {
-          'Content-Type': 'application/json'
-        })
-        res.end(JSON.stringify({ status: 'error', message: error }))
-        return
-      }
-
-      res.writeHead(200, {
-        'Content-Type': 'application/json'
+      res.writeHead(500, {
+        "Content-Type": "application/json"
       })
-      res.end(JSON.stringify({ status: 'success', path: '/images/' + image.name }))
-    })
-  })
+      res.end(JSON.stringify({ status: "error", message: error }))
+      return
+    }
 
-app.get("/getimage/:type/:name", cors(), (req,res) => {
-  const file = __dirname + "/images/" + `${req.params.type}/` + `${req.params.name}.jpg`
-  
+    res.writeHead(200, {
+      "Content-Type": "application/json"
+    })
+    res.end(
+      JSON.stringify({ status: "success", path: "/images/" + image.name })
+    )
+  })
+})
+
+app.get("/getimage/:type/:name", cors(), (req, res) => {
+  const file =
+    __dirname + "/images/" + `${req.params.type}/` + `${req.params.name}.jpg`
+
   res.sendFile(file)
 })
+
+app.post(
+  "/newUser",
+  [
+    check("first_name")
+      .exists()
+      .isLength({ min: 1, max: 20 }),
+    check("second_name")
+      .exists()
+      .isLength({ min: 1, max: 20 }),
+    check("email").exists().isEmail(),
+    check("password").exists()
+  ],
+  cors(),
+  async (req, res) => {
+    try {
+      const errors = validationResult(req)
+      console.log(errors);
+      
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+      }
+      const salt = await bcrypt.genSalt()
+      const hashedPassword = await bcrypt.hash(req.body.password, salt)
+      const user = {
+        first_name: req.body.first_name,
+        second_name: req.body.second_name,
+        email: req.body.email,
+        password: hashedPassword,
+        role: "visitor"
+      }
+      console.log(user);
+      
+      dataBase.insertData("clients", user)
+      return res.status(200)
+    } catch {
+      res.status(422).json({errors:"error in the process of creating a user"})
+    }
+  }
+)
