@@ -4,6 +4,7 @@ const { check, oneOf, validationResult } = require("express-validator")
 const fileUpload = require("express-fileupload")
 const app = express()
 const bcrypt = require("bcrypt")
+const axios = require("axios")
 
 app.listen(3001, () => console.log("Server ready"))
 
@@ -310,15 +311,16 @@ app.post(
     check("second_name")
       .exists()
       .isLength({ min: 1, max: 20 }),
-    check("email").exists().isEmail(),
+    check("email")
+      .exists()
+      .isEmail(),
     check("password").exists()
   ],
   cors(),
   async (req, res) => {
     try {
       const errors = validationResult(req)
-      console.log(errors);
-      
+
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
       }
@@ -331,12 +333,26 @@ app.post(
         password: hashedPassword,
         role: "visitor"
       }
-      console.log(user);
-      
-      dataBase.insertData("clients", user)
-      return res.status(200)
+      const isEmailExists = async () => {
+        return await axios.post("http://127.0.0.1:3001/checkdata", {
+          table: "clients",
+          key: "email",
+          email: user.email
+        })
+      }
+      ;(async () => {
+        const status = await isEmailExists()
+        if (status.data.status)
+          return res.status(205).json({ errors: "Email is already registered" })
+        else {
+          dataBase.insertData("clients", user)
+          return res.status(200).json({ errors: "None"})
+        }
+      })()
     } catch {
-      res.status(422).json({errors:"error in the process of creating a user"})
+      res
+        .status(422)
+        .json({ errors: "error in the process of creating a user" })
     }
   }
 )
