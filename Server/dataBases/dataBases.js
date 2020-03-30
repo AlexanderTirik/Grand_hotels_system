@@ -15,7 +15,7 @@ connection.connect(err => {
   }
 })
 
-const insertData = (table, info) => {
+const insertData = async (table, info) => {
   const queryInfo = [table, info]
   connection.query(
     "INSERT INTO ?? SET ?",
@@ -31,7 +31,7 @@ const insertData = (table, info) => {
 
 exports.insertData = insertData
 
-const showData = (table, res) => {
+const showData = async (table, res) => {
   connection.query("SELECT * FROM ??", table, (error, result, fields) => {
     if (error) {
       console.error("An error occurred while executing the SELECT query.")
@@ -44,7 +44,7 @@ const showData = (table, res) => {
 
 exports.showData = showData
 
-const showDataColumns = (table, res) => {
+const showDataColumns = async (table, res) => {
   const query = `
   SELECT COLUMN_NAME
   FROM INFORMATION_SCHEMA.COLUMNS
@@ -64,7 +64,7 @@ const showDataColumns = (table, res) => {
 
 exports.showDataColumns = showDataColumns
 
-const checkData = (table, key, value, res) => {
+const checkData = async (table, key, value, res) => {
   const queryInfo = [table, key, value]
 
   const query = `
@@ -84,7 +84,7 @@ const checkData = (table, key, value, res) => {
 
 exports.checkData = checkData
 
-const deleteData = (table, id) => {
+const deleteData = async (table, id) => {
   const queryInfo = [table, id]
 
   const query = `
@@ -101,7 +101,7 @@ const deleteData = (table, id) => {
 
 exports.deleteData = deleteData
 
-const updateData = (table, info, id) => {
+const updateData = async (table, info, id) => {
   const queryInfo = [table, info, id]
 
   const query = `

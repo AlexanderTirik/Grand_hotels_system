@@ -97,37 +97,38 @@ app.post(
       check("info.second_name")
         .exists()
         .isLength({ min: 1, max: 20 }),
-      check("info.email").exists().isEmail,
+      check("info.email")
+        .exists()
+        .isEmail(),
       check("info.password")
         .exists()
         .isHash()
     ]
   ]),
   cors(),
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() })
+      return await res.status(422).json({ errors: errors.array() })
     }
-    console.log(req.body.info)
     const table = req.body.table
     const info = req.body.info
 
-    dataBase.insertData(table, info)
+    await dataBase.insertData(table, info)
   }
 )
 
-app.post("/showdata", cors(), (req, res) => {
+app.post("/showdata", cors(), async (req, res) => {
   const table = req.body.table
   dataBase.showData(table, res)
 })
 
-app.post("/showdatacolumns", cors(), (req, res) => {
+app.post("/showdatacolumns", cors(), async (req, res) => {
   const table = req.body.table
   dataBase.showDataColumns(table, res)
 })
 
-app.post("/checkdata", cors(), (req, res) => {
+app.post("/checkdata", cors(), async (req, res) => {
   const table = req.body.table
   const elKey = req.body.key
   const value = req.body[elKey]
@@ -142,7 +143,7 @@ app.post(
       .isInt()
   ],
   cors(),
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
@@ -256,13 +257,27 @@ app.post(
       check("info.phone_number")
         .exists()
         .isMobilePhone()
+    ],
+    [
+      check("info.first_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.second_name")
+        .exists()
+        .isLength({ min: 1, max: 20 }),
+      check("info.email")
+        .exists()
+        .isEmail(),
+      check("info.password")
+        .exists()
+        .isHash()
     ]
   ]),
   cors(),
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() })
+      return await res.status(422).json({ errors: errors.array() })
     }
 
     const table = req.body.table
@@ -272,7 +287,7 @@ app.post(
   }
 )
 
-app.post("/saveimage/:table", cors(), (req, res) => {
+app.post("/saveimage/:table", cors(), async (req, res) => {
   image = req.files.picture
   const path = "images/" + `${req.params.table}/` + image.name
 
@@ -295,7 +310,7 @@ app.post("/saveimage/:table", cors(), (req, res) => {
   })
 })
 
-app.get("/getimage/:type/:name", cors(), (req, res) => {
+app.get("/getimage/:type/:name", cors(), async (req, res) => {
   const file =
     __dirname + "/images/" + `${req.params.type}/` + `${req.params.name}.jpg`
 
@@ -346,7 +361,7 @@ app.post(
           return res.status(205).json({ errors: "Email is already registered" })
         else {
           dataBase.insertData("clients", user)
-          return res.status(200).json({ errors: "None"})
+          return res.status(200).json({ errors: "None" })
         }
       })()
     } catch {
