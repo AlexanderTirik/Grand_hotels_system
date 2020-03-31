@@ -1,9 +1,13 @@
+if (process.env.NODE_ENV !== 'production'){
+  require('dotenv').config()
+}
+
 const mysql = require("mysql")
 
 const options = {
-  user: "root",
-  password: "Admin1",
-  database: "grand_hotel_systems"
+  user: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 }
 
 const connection = mysql.createConnection(options)
