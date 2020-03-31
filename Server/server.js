@@ -357,7 +357,8 @@ app.post(
       }
       ;(async () => {
         const status = await isEmailExists()
-        if (status.data.status)
+        
+        if (status.data !== null)
           return res.status(205).json({ errors: "Email is already registered" })
         else {
           dataBase.insertData("clients", user)

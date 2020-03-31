@@ -77,8 +77,8 @@ const checkData = async (table, key, value, res) => {
       throw error
     }
 
-    if (result[0] != undefined) res.send(JSON.stringify({ status: true }))
-    else res.send(JSON.stringify({ status: false }))
+    if (result[0] === undefined) res.send(JSON.stringify(null))
+    else res.send(JSON.stringify({result}))
   })
 }
 

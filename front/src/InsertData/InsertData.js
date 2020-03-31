@@ -81,13 +81,13 @@ export default function InsertData(props) {
         )
         const request1 = await responseToCheck1.json()
           
-        if (request1.status == true) {
+        if (request1.status !== null) {
           const responseToCheck2 = await fetch(
             "http://127.0.0.1:3001/checkdata",
             checkOptions2
           )
           const request2 = await responseToCheck2.json()
-          if (request2.status == true) {
+          if (request2.status !== null) {
             const response = await fetch(
               "http://127.0.0.1:3001/insertdata",
               insertOptions
