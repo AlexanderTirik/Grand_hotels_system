@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt")
 const { validationResult } = require("express-validator")
-const axios = require("axios")
+const isEmailExists = require("../util/isEmailExists").isEmailExists
+const insertData = require("../models/insertDataDB").insertData
 
 const newUser = async (req, res) => {
   try {
@@ -18,23 +19,15 @@ const newUser = async (req, res) => {
       password: hashedPassword,
       role: "visitor"
     }
-    const isEmailExists = async () => {
-      return await axios.post("http://127.0.0.1:3001/checkdata", {
-        table: "clients",
-        key: "email",
-        email: user.email
-      })
-    }
-    ;(async () => {
-      const status = await isEmailExists()
-
+      const status = await isEmailExists(user.email)
+      
       if (status.data !== null)
         return res.status(205).json({ errors: "Email is already registered" })
       else {
-        dataBase.insertData("clients", user)
+        insertData("clients", user)
         return res.status(200).json({ errors: "None" })
       }
-    })()
+
   } catch {
     res.status(422).json({ errors: "error in the process of creating a user" })
   }
