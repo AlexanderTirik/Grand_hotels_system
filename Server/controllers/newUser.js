@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt")
 const { validationResult } = require("express-validator")
-const isEmailExists = require("../util/isEmailExists").isEmailExists
+const getUserByEmail = require("../util/getUserByEmail").getUserByEmail
 const insertData = require("../models/insertDataDB").insertData
 
 const newUser = async (req, res) => {
@@ -19,9 +19,9 @@ const newUser = async (req, res) => {
       password: hashedPassword,
       role: "visitor"
     }
-      const status = await isEmailExists(user.email)
+      const status = await getUserByEmail(user.email)
       
-      if (status.data !== null)
+      if (status !== null)
         return res.status(205).json({ errors: "Email is already registered" })
       else {
         insertData("clients", user)
