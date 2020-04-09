@@ -11,21 +11,35 @@ import Login from "../Login/Login"
 import SignUp from "../SignUp/SignUp"
 import "animate.css"
 
+const Div = styled.div`
+  background-color: #f6e1e8;
+`
+
 export default function MainPage(props) {
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [isSignUpOpen, setIsSignUpOpen] = useState(false)
-  const Div = styled.div`
-    background-color: #f6e1e8;
-  `
 
-  let NavBarComp;
-  if (!(isLoginOpen || isSignUpOpen)){
-    NavBarComp = (<NavBar setIsLoginOpen = {setIsLoginOpen} setIsSignUpOpen = {setIsSignUpOpen}/>)
+  let NavBarComp
+  if (!(isLoginOpen || isSignUpOpen)) {
+    NavBarComp = (
+      <NavBar
+        setIsLoginOpen={setIsLoginOpen}
+        setIsSignUpOpen={setIsSignUpOpen}
+      />
+    )
   }
   return (
     <Div>
-      <Login isLoginOpen={isLoginOpen} setIsLoginOpen = {setIsLoginOpen} setIsSignUpOpen = {setIsSignUpOpen}/>
-      <SignUp isSignUpOpen={isSignUpOpen} setIsSignUpOpen = {setIsSignUpOpen} setIsLoginOpen = {setIsLoginOpen}/>
+      <Login
+        isLoginOpen={isLoginOpen}
+        setIsLoginOpen={setIsLoginOpen}
+        setIsSignUpOpen={setIsSignUpOpen}
+      />
+      <SignUp
+        isSignUpOpen={isSignUpOpen}
+        setIsSignUpOpen={setIsSignUpOpen}
+        setIsLoginOpen={setIsLoginOpen}
+      />
       {NavBarComp}
       <Greeting />
       <Diagrams />

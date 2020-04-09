@@ -2,26 +2,26 @@ import React from "react"
 import styled from "styled-components"
 import AOS from "aos"
 
+const Div = styled.div`
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  padding: 10px;
+  margin: 5px 10px;
+  border: dashed 3px #c2b0b6;
+`
+const Article = styled.article`
+  font-weight: bold;
+  font-size: 2vw;
+  color: #754857;
+`
+
+const H1 = styled.h1`
+  text-decoration: underline dashed #c2b0b6;
+  font-weight: bold;
+  font-size: 3vw;
+  color: #754857;
+`
+
 export default function MainPage(props) {
-  const Div = styled.div`
-    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-    padding: 10px;
-    margin: 5px 10px;
-    border: dashed 3px #c2b0b6;
-  `
-  const Article = styled.article`
-    font-weight: bold;
-    font-size: 2vw;
-    color: #754857;
-  `
-
-  const H1 = styled.h1`
-    text-decoration: underline dashed #c2b0b6;
-    font-weight: bold;
-    font-size: 3vw;
-    color: #754857;
-  `
-
   return (
     <Div data-aos="zoom-in-down">
       <H1>About us</H1>
