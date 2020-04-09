@@ -6,8 +6,9 @@ const getUserByEmail = async email => {
     key: "email",
     email: email
   })
+  if (request.data === null) return await null
   const user = await request.data.result[0]
   return await user
 }
-
+ 
 exports.getUserByEmail = getUserByEmail
