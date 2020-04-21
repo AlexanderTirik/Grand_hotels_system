@@ -53,7 +53,7 @@ export default function Login(props) {
       >
         <CloseButton onClick={() => props.setIsLoginOpen(false)}>✗</CloseButton>
         <WordLogin> Login </WordLogin>
-        <LoginForm />
+        <LoginForm setIsLoginOpen={props.setIsLoginOpen} />
         <SignUpButton
           onClick={() => {
             props.setIsLoginOpen(false)
