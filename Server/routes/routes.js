@@ -1,9 +1,12 @@
-module.exports = function(app) {
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config()
+}
+
+module.exports = function (app) {
   const cors = require("cors")
   const fileUpload = require("express-fileupload")
 
   app.options("*", cors())
-
   const insertDataValidator = require("../controllers/insertDataValidator")
     .insertDataValidator
   const insertData = require("../controllers/insertData").insertData
@@ -47,7 +50,11 @@ module.exports = function(app) {
 
   const newUserValidator = require("../controllers/newUserValidator")
     .newUserValidator
-  const newUser = require("../controllers/newUser").newUser
+  
+    const newUser = require("../controllers/newUser").newUser
 
   app.post("/newUser", newUserValidator, cors(), newUser)
+
+  const login = require("../controllers/login").login
+  app.post("/login", cors(), login)
 }
