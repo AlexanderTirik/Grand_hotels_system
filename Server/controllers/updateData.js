@@ -10,7 +10,7 @@ const updateData = async (req, res) => {
   const table = req.body.table
   const query = req.body.info
   const id = query.id
-  DB.updateData(table, query, id)
+  if (id !== 1) DB.updateData(table, query, id)
 }
 
 exports.updateData = updateData

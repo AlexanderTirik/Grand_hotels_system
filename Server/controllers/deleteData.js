@@ -8,7 +8,7 @@ const deleteData = async (req, res) => {
   }
   const table = req.body.table
   const id = req.body.info.id
-  await DB.deleteData(table, id)
+  if (id !== 1) await DB.deleteData(table, id)
 }
 
 exports.deleteData = deleteData
