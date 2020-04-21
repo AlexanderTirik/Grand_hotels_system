@@ -1,9 +1,13 @@
-import React from "react"
-import { useState, useEffect } from "react"
+import React, {useEffect} from "react"
 import "bootstrap/dist/css/bootstrap.css"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import wave from "../images/wave.png"
 import { animateScroll as scroll } from "react-scroll"
+import { createAuthProvider } from "react-token-auth"
+
+export const [useAuth, authFetch, login, logout] = createAuthProvider({
+  accessTokenKey: "accessToken",
+})
 
 const Div = styled.div`
   display: flex;
@@ -90,6 +94,8 @@ const A = styled.button`
 `
 
 export default function NavBar(props) {
+  const [logged] = useAuth()
+
   return (
     <Div>
       <Header>
@@ -130,12 +136,23 @@ export default function NavBar(props) {
               About us
             </A>
           </Li>
-          <Li>
-            <A onClick={() => props.setIsLoginOpen(true)}>Login</A>
-          </Li>
-          <Li>
-            <A onClick={() => props.setIsSignUpOpen(true)}>Sign up</A>
-          </Li>
+          {!logged && (
+            <>
+              <Li>
+                <A onClick={() => props.setIsLoginOpen(true)}>Login</A>
+              </Li>
+              <Li>
+                <A onClick={() => props.setIsSignUpOpen(true)}>Sign up</A>
+              </Li>
+            </>
+          )}
+          {logged && (
+            <>
+              <Li>
+                <A onClick={() => logout()}>Logout</A>
+              </Li>
+            </>
+          )}
         </Ul>
       </Header>
       <WaveF />
