@@ -1,8 +1,9 @@
-import React, {useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import styled from "styled-components"
 import wave from "../images/wave.png"
 import { animateScroll as scroll } from "react-scroll"
+import { Link } from "react-router-dom"
 import { createAuthProvider } from "react-token-auth"
 
 export const [useAuth, authFetch, login, logout] = createAuthProvider({
@@ -95,6 +96,18 @@ const A = styled.button`
 
 export default function NavBar(props) {
   const [logged] = useAuth()
+  const [isAdmin, setIsAdmin] = useState(null)
+
+  useEffect(() => {
+    const options = {
+      method: "POST",
+    }
+    ;(async () => {
+      const response = await authFetch("http://127.0.0.1:3001/isAdmin", options)
+      if (response.status === 200) setIsAdmin("true")
+      if (response.status !== 200) setIsAdmin(null)
+    })()
+  }, [logged])
 
   return (
     <Div>
@@ -149,7 +162,23 @@ export default function NavBar(props) {
           {logged && (
             <>
               <Li>
-                <A onClick={() => logout()}>Logout</A>
+                <A
+                  onClick={() => {
+                    logout()
+                    document.location.reload(true)
+                  }}
+                >
+                  Logout
+                </A>
+              </Li>
+            </>
+          )}
+          {isAdmin && (
+            <>
+              <Li>
+                <Link to={`/dbcontrol`}>
+                  <A>DB Control</A>
+                </Link>
               </Li>
             </>
           )}
