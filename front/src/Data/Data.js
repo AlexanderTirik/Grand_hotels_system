@@ -7,7 +7,12 @@ import InsertData from "../InsertData/InsertData.js"
 import DeleteData from "../DeleteData/DeleteData.js"
 import UpdateData from "../UpdateData/UpdateData.js"
 import SaveImage from "../SaveImage/SaveImage.js"
+import {createAuthProvider} from 'react-token-auth';
 
+export const [useAuth, authFetch, login, logout] =
+    createAuthProvider({
+        accessTokenKey: 'accessToken'
+    });
 export default function Data() {
   const [table, setTalbe] = useState("hotels")
   const [headers, setHeaders] = useState([])
@@ -17,15 +22,15 @@ export default function Data() {
   const showDataColumnsReq = () => {
     const options = {
       method: "POST",
-      headers: new Headers({
+      headers: {
         "content-type": "application/json"
-      }),
+      },
       body: JSON.stringify({
         table: table
       })
     }
     ;(async () => {
-      const response = await fetch(
+      const response = await authFetch(
         "http://127.0.0.1:3001/showdatacolumns",
         options
       )
@@ -63,13 +68,7 @@ export default function Data() {
           <Button name="classes" onClick={() => setTalbe("classes")}>
             Classes
           </Button>
-          <Button name="visits" onClick={() => setTalbe("visits")}>
-            Visits
-          </Button>
-          <Button name="visitors" onClick={() => setTalbe("visitors")}>
-            Visitors
-          </Button>
-          <Button name="visitors" onClick={() => setTalbe("clients")}>
+          <Button name="clients" onClick={() => setTalbe("clients")}>
             Clients
           </Button>
         </ButtonGroup>

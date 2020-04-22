@@ -1,20 +1,24 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
+import { createAuthProvider } from "react-token-auth"
 
+export const [useAuth, authFetch, login, logout] = createAuthProvider({
+  accessTokenKey: "accessToken",
+})
 export default function InsertData(props) {
   const [query, setQuery] = useState({})
 
   const submitClick = () => {
     const insertOptions = {
       method: "POST",
-      headers: new Headers({
-        "content-type": "application/json"
-      }),
+      headers: {
+        "content-type": "application/json",
+      },
       body: JSON.stringify({
         table: props.table,
-        info: query
-      })
+        info: query,
+      }),
     }
 
     let shouldCheck = false
@@ -25,12 +29,12 @@ export default function InsertData(props) {
       checkData1 = {
         table: "hotels",
         key: "id",
-        id: query.hotel_id
+        id: query.hotel_id,
       }
       checkData2 = {
         table: "positions",
         key: "id",
-        id: query.position_id
+        id: query.position_id,
       }
     }
     if (props.table === "rooms") {
@@ -38,12 +42,12 @@ export default function InsertData(props) {
       checkData1 = {
         table: "hotels",
         key: "id",
-        id: query.hotel_id
+        id: query.hotel_id,
       }
       checkData2 = {
         table: "classess",
         key: "id",
-        id: query.class_id
+        id: query.class_id,
       }
     }
     if (props.table === "visits") {
@@ -51,27 +55,27 @@ export default function InsertData(props) {
       checkData1 = {
         table: "rooms",
         key: "id",
-        id: query.room_id
+        id: query.room_id,
       }
       checkData2 = {
         table: "visitors",
         key: "id",
-        id: query.visitor_id
+        id: query.visitor_id,
       }
     }
     const checkOptions1 = {
       method: "POST",
       headers: new Headers({
-        "content-type": "application/json"
+        "content-type": "application/json",
       }),
-      body: JSON.stringify(checkData1)
+      body: JSON.stringify(checkData1),
     }
     const checkOptions2 = {
       method: "POST",
       headers: new Headers({
-        "content-type": "application/json"
+        "content-type": "application/json",
       }),
-      body: JSON.stringify(checkData2)
+      body: JSON.stringify(checkData2),
     }
     ;(async () => {
       if (shouldCheck) {
@@ -80,7 +84,7 @@ export default function InsertData(props) {
           checkOptions1
         )
         const request1 = await responseToCheck1.json()
-          
+
         if (request1.status !== null) {
           const responseToCheck2 = await fetch(
             "http://127.0.0.1:3001/checkdata",
@@ -95,7 +99,7 @@ export default function InsertData(props) {
           }
         }
       } else {
-        const response = await fetch(
+        const response = await authFetch(
           "http://127.0.0.1:3001/insertdata",
           insertOptions
         )
@@ -103,7 +107,7 @@ export default function InsertData(props) {
     })()
   }
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const q = Object.assign({}, query)
     q[event.currentTarget.name] = event.target.value
     setQuery(q)
@@ -113,7 +117,7 @@ export default function InsertData(props) {
     <React.Fragment>
       <form>
         {props.headers.map((hed, i) => {
-          return Object.values(hed).map(header => {
+          return Object.values(hed).map((header) => {
             if (header != "id")
               return (
                 <input

@@ -1,6 +1,11 @@
 import React from "react"
 import { useState } from "react"
 import "bootstrap/dist/css/bootstrap.css"
+import { createAuthProvider } from "react-token-auth"
+
+export const [useAuth, authFetch, login, logout] = createAuthProvider({
+  accessTokenKey: "accessToken",
+})
 
 export default function DeleteData(props) {
   const [query, setQuery] = useState({})
@@ -8,20 +13,21 @@ export default function DeleteData(props) {
   const submitClick = () => {
     const options = {
       method: "POST",
-      headers: new Headers({
-        "content-type": "application/json"
-      }),
+      headers: { "content-type": "application/json" },
       body: JSON.stringify({
         table: props.table,
-        info: query
-      })
+        info: query,
+      }),
     }
     ;(async () => {
-      const response = await fetch("http://127.0.0.1:3001/deletedata", options)
+      const response = await authFetch(
+        "http://127.0.0.1:3001/deletedata",
+        options
+      )
     })()
   }
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const q = Object.assign({}, query)
     q[event.currentTarget.name] = event.target.value
     setQuery(q)
