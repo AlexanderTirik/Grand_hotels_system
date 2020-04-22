@@ -5,13 +5,23 @@ if (process.env.NODE_ENV !== "production") {
 module.exports = function (app) {
   const cors = require("cors")
   const fileUpload = require("express-fileupload")
+  const authentificateAdminToken = require("../middlewares/authentificateAdminToken")
+    .authentificateAdminToken
+  const authentificateToken = require("../middlewares/authentificateToken")
+    .authentificateToken
 
   app.options("*", cors())
   const insertDataValidator = require("../controllers/insertDataValidator")
     .insertDataValidator
   const insertData = require("../controllers/insertData").insertData
 
-  app.post("/insertdata", insertDataValidator, cors(), insertData)
+  app.post(
+    "/insertdata",
+    insertDataValidator,
+    authentificateAdminToken,
+    cors(),
+    insertData
+  )
 
   const showData = require("../controllers/showData").showData
 
@@ -20,7 +30,12 @@ module.exports = function (app) {
   const showDataColumns = require("../controllers/showDataColumns")
     .showDataColumns
 
-  app.post("/showdatacolumns", cors(), showDataColumns)
+  app.post(
+    "/showdatacolumns",
+    authentificateAdminToken,
+    cors(),
+    showDataColumns
+  )
 
   const checkData = require("../controllers/checkData").checkData
 
@@ -30,19 +45,31 @@ module.exports = function (app) {
     .deleteDataValidator
   const deleteData = require("../controllers/deleteData").deleteData
 
-  app.post("/deletedata", deleteDataValidator, cors(), deleteData)
+  app.post(
+    "/deletedata",
+    deleteDataValidator,
+    authentificateAdminToken,
+    cors(),
+    deleteData
+  )
 
   const updateDataValidator = require("../controllers/updateDataValidator")
     .updateDataValidator
   const updateData = require("../controllers/updateData").updateData
 
-  app.post("/updatedata", updateDataValidator, cors(), updateData)
+  app.post(
+    "/updatedata",
+    updateDataValidator,
+    authentificateAdminToken,
+    cors(),
+    updateData
+  )
 
   const saveImage = require("../controllers/saveImage").saveImage
 
   app.use(fileUpload())
 
-  app.post("/saveimage/:table", cors(), saveImage)
+  app.post("/saveimage/:table", authentificateAdminToken, cors(), saveImage)
 
   const getImage = require("../controllers/getImage").getImage
 
@@ -50,11 +77,14 @@ module.exports = function (app) {
 
   const newUserValidator = require("../controllers/newUserValidator")
     .newUserValidator
-  
-    const newUser = require("../controllers/newUser").newUser
+
+  const newUser = require("../controllers/newUser").newUser
 
   app.post("/newUser", newUserValidator, cors(), newUser)
 
   const login = require("../controllers/login").login
   app.post("/login", cors(), login)
+
+  const isAdmin = require("../controllers/isAdmin").isAdmin
+  app.post("/isAdmin", cors(), isAdmin)
 }
