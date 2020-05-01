@@ -1,6 +1,6 @@
 const { oneOf, check } = require("express-validator")
 
-const updateDataValidator = () =>
+const updateDataValidator =
   oneOf([
     [
       check("info.id")
@@ -11,10 +11,7 @@ const updateDataValidator = () =>
         .isLength({ min: 1, max: 20 }),
       check("info.stars")
         .exists()
-        .isInt({ min: 1, max: 5 }),
-      check("info.img")
-        .exists()
-        .isDataURI()
+        .isInt({ min: 1, max: 5 })
     ],
     [
       check("info.id")
@@ -112,10 +109,7 @@ const updateDataValidator = () =>
         .isLength({ min: 1, max: 20 }),
       check("info.email")
         .exists()
-        .isEmail(),
-      check("info.password")
-        .exists()
-        .isHash()
+        .isEmail()
     ]
   ])
 
