@@ -7,6 +7,7 @@ import InsertData from "../InsertData/InsertData.js"
 import DeleteData from "../DeleteData/DeleteData.js"
 import UpdateData from "../UpdateData/UpdateData.js"
 import SaveImage from "../SaveImage/SaveImage.js"
+import LoadExcel from "../LoadExcel/LoadExcel.js"
 import {createAuthProvider} from 'react-token-auth';
 
 export const [useAuth, authFetch, login, logout] =
@@ -83,6 +84,7 @@ export default function Data() {
         </ButtonGroup>
       </div>
       {modeComponent}
+      <LoadExcel table={table} mode={mode}/>
       <ButtonGroup className="mr-2" aria-label="Second group">
         <Button onClick={() => setImageUp("hotels")}>Hotels</Button>
         <Button onClick={() => setImageUp("classes")}>Classes</Button>
