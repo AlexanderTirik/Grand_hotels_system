@@ -18,7 +18,6 @@ module.exports = function (app) {
   app.post(
     "/insertdata",
     insertDataValidator,
-    authentificateAdminToken,
     cors(),
     insertData
   )
@@ -30,12 +29,7 @@ module.exports = function (app) {
   const showDataColumns = require("../controllers/showDataColumns")
     .showDataColumns
 
-  app.post(
-    "/showdatacolumns",
-    authentificateAdminToken,
-    cors(),
-    showDataColumns
-  )
+  app.post("/showdatacolumns", cors(), showDataColumns)
 
   const checkData = require("../controllers/checkData").checkData
 
@@ -48,7 +42,6 @@ module.exports = function (app) {
   app.post(
     "/deletedata",
     deleteDataValidator,
-    authentificateAdminToken,
     cors(),
     deleteData
   )
@@ -60,7 +53,6 @@ module.exports = function (app) {
   app.post(
     "/updatedata",
     updateDataValidator,
-    authentificateAdminToken,
     cors(),
     updateData
   )
@@ -87,4 +79,7 @@ module.exports = function (app) {
 
   const isAdmin = require("../controllers/isAdmin").isAdmin
   app.post("/isAdmin", cors(), isAdmin)
+
+  const excelLoader = require("../controllers/excelLoader").excelLoader
+  app.post("/excel/:mode/:table", cors(), excelLoader)
 }
