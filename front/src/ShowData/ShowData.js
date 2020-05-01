@@ -3,10 +3,16 @@ import { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.css"
 import { Table } from "react-bootstrap"
 import { createAuthProvider } from "react-token-auth"
+import styled from "styled-components"
 
 export const [useAuth, authFetch, login, logout] = createAuthProvider({
   accessTokenKey: "accessToken",
 })
+
+const Div = styled.div`
+margin:2px;
+padding:2px;
+`
 function ShowData(props) {
   const [data, setData] = useState([])
   const [table, setTable] = useState("")
@@ -44,7 +50,7 @@ function ShowData(props) {
       </tr>
     ))
   return (
-    <React.Fragment>
+    <Div>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -57,7 +63,7 @@ function ShowData(props) {
         </thead>
         <tbody>{body}</tbody>
       </Table>
-    </React.Fragment>
+    </Div>
   )
 }
 
