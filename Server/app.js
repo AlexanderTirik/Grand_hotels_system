@@ -1,7 +1,12 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config()
+  }
+
 const express = require("express")
 const app = express()
 
-app.listen(3001, () => console.log("Server ready"))
+const port = process.env.PORT
+app.listen(port, () => console.log("Server ready"))
 
 app.use(express.json())
 
