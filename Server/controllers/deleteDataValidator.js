@@ -1,9 +1,9 @@
-const { check } = require("express-validator")
+const { check,oneOf } = require("express-validator")
 
-const deleteDataValidator = [
+const deleteDataValidator = oneOf([
   check("info.id")
     .exists()
     .isInt()
-]
+])
 
 exports.deleteDataValidator = deleteDataValidator
